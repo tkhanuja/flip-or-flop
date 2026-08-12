@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip or Flop - Omelette Tracker</title>
+    <link rel="icon" href="data:,">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            text-align: center;
+            padding: 40px;
+            color: #333;
+        }
+        .card {
+            background: white;
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        h1 { color: #ff6b6b; margin-bottom: 5px; }
+        .subtitle { color: #718096; font-size: 14px; margin-bottom: 25px; }
+        .stat-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            min-height: 70px;
+            align-items: center;
+        }
+        .stat-box {
+            font-size: 38px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .label { font-size: 12px; text-transform: uppercase; color: #a0aec0; letter-spacing: 1px; }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn {
+            flex: 1;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+            color: white;
+        }
+        .btn:active { transform: scale(0.96); }
+        .btn-flip { background-color: #48bb78; }
+        .btn-flip:hover { background-color: #38a169; }
+        .btn-flop { background-color: #f56565; }
+        .btn-flop:hover { background-color: #e53e3e; }
+
+        @keyframes pixelFlip {
+            0% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-35px) rotate(180deg) scale(1.2); }
+            100% { transform: translateY(0) rotate(360deg) scale(1); }
+        }
+
+        .chick-container {
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .video-widget {
+            width: 10vw; /* Exactly 10% of your screen width */
+            min-width: 80px;
+            max-width: 150px;
+            aspect-ratio: 1 / 1; /* Keeps it square like a small gif */
+            margin: 10px auto 20px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+
+            /* Forces the container to be completely invisible until explicitly shown */
+            .video-widget.hidden {
+            display: none !important;
+            }
+
+            .video-widget video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none; /* Hidden by default */
+            }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>🍳 Flip or Flop</h1>
+    <div>
+        <div class="subtitle">Omelette Tracker</div>
+        <div class="subtitle">How many perfect flips before you flop?</div>
+    </div>
+        <div id="chick-container" class="chick-container"></div>
+        
+        <div id="video-container" class="video-widget hidden">
+            <video id="record-video" src="assets/happychick.mp4" preload="auto" playsinline muted></video>
+            <video id="flop-video" src="assets/sadchick.mp4" preload="auto" playsinline muted></video>
+        </div>
+
+        <div class="stat-container">
+            <div>
+                <div class="label">Current Streak</div>
+                <div class="stat-box" id="current-streak"><div class="spinner"></div></div>
+            </div>
+            <div>
+                <div class="label">All-Time Record</div>
+                <div class="stat-box" id="max-record" style="color: #3182ce;"><div class="spinner"></div></div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-flip" onclick="registerResult('FLIP')">🍳 Flip!</button>
+            <button class="btn btn-flop" onclick="registerResult('FLOP')">💥 Flop</button>
+        </div>
+    </div>
+
+    <!-- Linked external JavaScript module -->
+    <script type="module" src="./app.js"></script>
+</body>
+</html>
